@@ -1,0 +1,76 @@
+Added solution to IsPermutation
+
+
+# --------------
+# Please enter the commit message for your changes. Everything below
+# this paragraph is ignored, and an empty message aborts the commit.
+# Just close the window to accept your message.
+diff --git a/2.Problems/2.1.ArraysAndStrings/IsPermutation.java b/2.Problems/2.1.ArraysAndStrings/IsPermutation.java
+new file mode 100644
+index 0000000..527a2c7
+--- /dev/null
++++ b/2.Problems/2.1.ArraysAndStrings/IsPermutation.java
+@@ -0,0 +1,51 @@
++// 2.1.3 Is Permutation
++//Given two strings, find if one string is a permutation of the other
++import java.util.Arrays;
++
++public class IsPermutation
++{
++	static boolean isPermutation(String s1, String s2)
++	{
++		if(s1 == null || s2 == null || s1.length() != s2.length())
++		{
++			return false;
++		}
++
++		char[] c1 = s1.toCharArray();
++		char[] c2 = s2.toCharArray();
++
++		Arrays.sort(c1);
++		Arrays.sort(c2);
++
++		for(int i = 0; i < c1.length; i++)
++		{
++			if(c1[i] != c2[i])
++			{
++				return false;
++			}
++		}
++
++		return true;
++	}
++
++	public static void main(String[] args)
++	{
++		if(args.length != 2)
++		{
++			System.out.println("Usage: java IsPermutation string1 string2");
++			System.out.println("Calculates whether or not string1 is a permutation of string2");
++			return;
++		}
++
++		boolean isPermutation = isPermutation(args[0], args[1]);
++
++		if(isPermutation)
++		{
++			System.out.println(args[0] + " is a permutation of " + args[1]);
++		}
++		else
++		{
++			System.out.println(args[0] + " is different to " + args[1]);
++		}
++	}
++}
+\ No newline at end of file
+diff --git a/2.Problems/2.1.ArraysAndStrings/Reverse.c b/2.Problems/2.1.ArraysAndStrings/Reverse.c
+index 5e75e43..ed28253 100644
+--- a/2.Problems/2.1.ArraysAndStrings/Reverse.c
++++ b/2.Problems/2.1.ArraysAndStrings/Reverse.c
+@@ -1,3 +1,6 @@
++// 2.1.2 Reverse
++// In C or C++, write a function, reverse, that reverses a string.
++// void reverse(char* str)
+ #include <stdio.h>
+ 
+ int length(char* str)
