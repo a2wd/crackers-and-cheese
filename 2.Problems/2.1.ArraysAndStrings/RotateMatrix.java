@@ -5,24 +5,31 @@ import java.util.Scanner;
 
 public class RotateMatrix
 {
+	public static void rotatedMatrixInSitu(int[][] matrix)
+	{
+
+	}
+
 	public static void rotateMatrix(int[][] matrix)
 	{
 		int l = matrix.length;
-		int swaps = (l * l) / 2;
+		int[][] rotatedMatrix = new int[l][l];
 
+		//Rotate matrix into rotatedMatrix
 		for(int i = 0; i < l; i++)
 		{
 			for(int j = 0; j < l; j++)
 			{
-				int temp = matrix[i][j];
-				matrix[i][j] = matrix[j][l - i - 1];
-				matrix[j][l - i - 1] = temp;
+				rotatedMatrix[j][l - i - 1] = matrix[i][j];
+			}
+		}
 
-				swaps--;
-				if(swaps == 0)
-				{
-					return;
-				}
+		//Re-assign rotated values to matrix
+		for(int i = 0; i < l; i++)
+		{
+			for(int j = 0; j < l; j++)
+			{
+				matrix[i][j] = rotatedMatrix[i][j];
 			}
 		}
 	}
@@ -46,13 +53,24 @@ public class RotateMatrix
 
 	public static void main(String[] args)
 	{
-		if(args.length != 0)
+		boolean withoutAdditionalDataStructure = false;
+
+		if(args.length == 1)
 		{
-			System.out.println("\nUsage: java RotateMatrix");
-			System.out.println("Rotates an NxN matrix through 90 degress\n");
-			System.out.println("STDIN: n i1, i2..i(n^2)");
-			System.out.println("Where n is the matrix size and i1 through i(n^2) are the matrix values top left to bottom right\n");
-			return;
+			if(args[0].equals("-h") || args[0].equals("-H"))
+			{
+				System.out.println("> Usage: java RotateMatrix [-w]");
+				System.out.println("> Rotates an NxN matrix through 90 degress");
+				System.out.println("> STDIN: n i1, i2..i(n^2)");
+				System.out.println("> Where n is the matrix size and i1 through i(n^2) are the matrix values top left to bottom right");
+				System.out.println("> The optional -w flag can be set to perform the rotation without an additional data structure");
+				return;
+			}
+
+			if(args[0].equals("-w") || args[0].equals("-W"))
+			{
+				withoutAdditionalDataStructure = true;
+			}
 		}
 
 		Scanner scanner = new Scanner(System.in);
@@ -70,7 +88,17 @@ public class RotateMatrix
 		System.out.println();
 
 		printMatrix(matrix);
-		rotateMatrix(matrix);
+
+		if(withoutAdditionalDataStructure)
+		{
+			rotatedMatrixInSitu(matrix);
+
+		}
+		else
+		{
+			rotateMatrix(matrix);
+		}
+
 		printMatrix(matrix);
 	}
 }
