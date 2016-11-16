@@ -4,7 +4,7 @@
 //Assume sufficient space is provided at the end of the string.
 public class ReplaceSpaces
 {
-	static void replaceSpaces(char[] input)
+	public static void replaceSpaces(char[] input)
 	{
 		int l = input.length;
 

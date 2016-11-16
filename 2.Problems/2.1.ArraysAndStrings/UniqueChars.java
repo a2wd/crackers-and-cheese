@@ -5,7 +5,7 @@ import java.lang.*;
 
 public class UniqueChars
 {
-	static boolean hasUniqueChars(String s)
+	public static boolean hasUniqueChars(String s)
 	{
 		if(s == null || s.length() == 0) {
 			throw new IllegalArgumentException("Null or empty string passed to method");

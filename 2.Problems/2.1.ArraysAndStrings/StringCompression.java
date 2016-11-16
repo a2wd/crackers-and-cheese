@@ -5,7 +5,7 @@
 
 public class StringCompression
 {
-	static char[] compress(char[] input)
+	public static char[] compress(char[] input)
 	{
 		char[] compressed = new char[input.length];
 		int position = 0;
