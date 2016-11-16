@@ -1,11 +1,49 @@
 // 2.1.7 Zero Matrix
 // If an element of the input matrix is 0, zero the column and row.
+import java.util.Scanner;
 
 public class ZeroMatrix
 {
 	public static void zeroMatrix(int[][] matrix)
 	{
-		
+		int m = matrix.length;
+		int n = matrix[0].length;
+
+		boolean[] rows = new boolean[m];
+		boolean[] cols = new boolean[n];
+
+		for(int i = 0; i < m; i++)
+		{
+			if(rows[i])
+			{
+				continue;
+			}
+
+			for(int j = 0; j < n; j++)
+			{
+				if(cols[j])
+				{
+					continue;
+				}
+
+				if(matrix[i][j] == 0)
+				{
+					rows[i] = true;
+					cols[j] = true;
+				}
+			}
+		}
+
+		for(int i = 0; i < m; i++)
+		{
+			for(int j = 0; j < n; j++)
+			{
+				if(rows[i] || cols[j])
+				{
+					matrix[i][j] = 0;
+				}
+			}
+		}
 	}
 
 	public static void printMatrix(int[][] matrix)
@@ -29,7 +67,7 @@ public class ZeroMatrix
 	{
 		boolean withoutAdditionalDataStructure = false;
 
-		if(args.length == 1 && (args[0].equals("-h") || args[0].equals("-H"))
+		if(args.length == 1 && (args[0].equals("-h") || args[0].equals("-H")))
 		{
 			System.out.println("> Usage: java ZeroMatrix");
 			System.out.println("Where an element in a matrix is 0, the column and row will be zeroed");
