@@ -42,10 +42,18 @@ Given an image represented by an NxN matrix, where each pixel in the image is
 4 bytes, write a method to rotate the image by 90 degrees. Can you do this in
 place?
 
+* The files in `/MatrixInput/Xn.txt` can be used to test the matrix
+* eg: `> java RotateMatrix > MatrixInput/4n.txt` or `type MatrixInput/3n.txt | java RotateMatrix`
+* The client accepts a command line argument `-w` to perform the rotation without the additional data structure
+* The client accepts the command line argument `-i` to negate the rotation and indirectly access the array through a wrapper.
+
 ### 1.7, ZeroMatrix.java
 
 Write an algorithm such that if an element in an MxN matrix is 0, its entire row
 and column are set to 0.
+
+* The files in `/MatrixInput/Xz.txt` can be used to test the matrix
+* eg: `> java ZeroMatrix > MatrixInput/2z.txt` or `type MatrixInput/5z.txt | java ZeroMatrix`
 
 ### 1.8, IsRotation.java
 

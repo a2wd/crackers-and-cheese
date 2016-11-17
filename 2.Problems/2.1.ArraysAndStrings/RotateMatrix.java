@@ -5,6 +5,13 @@ import java.util.Scanner;
 
 public class RotateMatrix
 {
+	public static int rotatedMatrixWrapper(int[][] matrix, int i, int j)
+	{
+		int l = matrix.length - 1;
+
+		return matrix[l - j][i];
+	}
+
 	public static void rotatedMatrixInSitu(int[][] matrix)
 	{
 		int l = matrix.length;
@@ -46,7 +53,7 @@ public class RotateMatrix
 		}
 	}
 
-	public static void printMatrix(int[][] matrix)
+	public static void printMatrix(int[][] matrix, boolean userWrapper)
 	{
 		for(int i = 0; i < matrix.length; i++)
 		{
@@ -56,7 +63,15 @@ public class RotateMatrix
 				{
 					System.out.print(" ");
 				}
-				System.out.print(matrix[i][j]);
+
+				if(userWrapper)
+				{
+					System.out.print(rotatedMatrixWrapper(matrix, i, j));
+				}
+				else
+				{
+					System.out.print(matrix[i][j]);
+				}
 			}
 			System.out.println();
 		}
@@ -66,6 +81,7 @@ public class RotateMatrix
 	public static void main(String[] args)
 	{
 		boolean withoutAdditionalDataStructure = false;
+		boolean userWrapper = false;
 
 		if(args.length == 1)
 		{
@@ -76,12 +92,18 @@ public class RotateMatrix
 				System.out.println("> STDIN: n i1, i2..i(n^2)");
 				System.out.println("> Where n is the matrix size and i1 through i(n^2) are the matrix values top left to bottom right");
 				System.out.println("> The optional -w flag can be set to perform the rotation without an additional data structure");
+				System.out.println("> The optional -i flag can be set to negate the rotation and add a wrapper to access the matrix as if rotated");
 				return;
 			}
 
 			if(args[0].equals("-w") || args[0].equals("-W"))
 			{
 				withoutAdditionalDataStructure = true;
+			}
+
+			if(args[0].equals("-i") || args[0].equals("-I"))
+			{
+				userWrapper = true;
 			}
 		}
 
@@ -99,7 +121,13 @@ public class RotateMatrix
 		}
 		System.out.println();
 
-		printMatrix(matrix);
+		printMatrix(matrix, false);
+
+		if(userWrapper)
+		{
+			printMatrix(matrix, true);
+			return;
+		}
 
 		if(withoutAdditionalDataStructure)
 		{
@@ -111,6 +139,6 @@ public class RotateMatrix
 			rotateMatrix(matrix);
 		}
 
-		printMatrix(matrix);
+		printMatrix(matrix, false);
 	}
 }
