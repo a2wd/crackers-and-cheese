@@ -4,6 +4,38 @@
 //Assume sufficient space is provided at the end of the string.
 public class ReplaceSpaces
 {
+	public static void replaceSpacesEfficient(char[] input, int length)
+	{
+		int spaces = 0;
+
+		for(int i = 0; i < length; i++)
+		{
+			if(input[i] == ' ')
+			{
+				spaces++;
+			}
+		}
+
+		int position = length + spaces;
+		input[position] = '\0';
+
+		for(int i = length; i >= 0; i--)
+		{
+			if(input[i] == ' ')
+			{
+				input[position - 3] = '%';
+				input[position - 2] = '2';
+				input[position - 1] = '0';
+				position -= 3;
+			}
+			else
+			{
+				input[position - 1] = input[i];
+				position -= 1;
+			}
+		}
+	}
+
 	public static void replaceSpaces(char[] input)
 	{
 		int l = input.length;
@@ -39,17 +71,51 @@ public class ReplaceSpaces
 
 	public static void main(String[] args)
 	{
-		if(args.length != 1)
+		if(args.length == 0)
 		{
-			System.out.println("Usage: java ReplaceSpaces string");
-			System.out.println("Replaces spaces in a string with '%20");
+			printUsage();
 			return;
 		}
 
-		char[] c = args[0].toCharArray();
+		boolean useEfficientAlgorithm = false;
+		char[] c;
 
-		replaceSpaces(c);
+		if(args.length == 2)
+		{
+			if(!args[0].equals("-e") && !args[0].equals("-E"))
+			{
+				printUsage();
+				return;
+			}
+
+			//else
+			useEfficientAlgorithm = true;
+			c = args[1].toCharArray();
+		}
+		else
+		{
+			c = args[0].toCharArray();
+		}
+
+		if(useEfficientAlgorithm)
+		{
+			int endOfWord;
+			for(endOfWord = c.length - 1; c[endOfWord] == ' '; endOfWord--);
+
+			replaceSpacesEfficient(c, endOfWord);
+		}
+		else
+		{
+			replaceSpaces(c);
+		}
 
 		System.out.println(c);
+	}
+
+	public static void printUsage()
+	{
+		System.out.println("Usage: java ReplaceSpaces [-e] string");
+		System.out.println("Replaces spaces in a string with '%20");
+		System.out.println("Use the optional parameter -e to use an efficient algorithm");
 	}
 }
