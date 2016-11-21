@@ -67,8 +67,8 @@ public class DeleteNode
 
 		Node n = null;
 
-		// try
-		// {
+		try
+		{
 			for(int i = 0; i < args.length; i++)
 			{
 				int val = Integer.parseInt(args[i]);
@@ -112,10 +112,10 @@ public class DeleteNode
 
 				k = s.nextInt();
 			}
-		// }
-		// catch(Exception e)
-		// {
-		// 	System.out.println(e);
-		// }
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
 	}
 }
