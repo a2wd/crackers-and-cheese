@@ -48,4 +48,5 @@ Input:`A->B->C->D->E->C`
 Output: `C`
 
 ## 2.2.7 IsPalindrome.java
+
 Implement a function to check if a linked list is a palindrome.
