@@ -35,7 +35,7 @@ public class IsPalindrome
 
 		//Iterate through list
 		int headPos = 0;
-		int tailPos = size - 1;
+		int tailPos = size;
 		Node tail = head;
 		head = n;
 
@@ -51,7 +51,7 @@ public class IsPalindrome
 			headPos++;
 			tailPos--;
 
-			for(int t = headPos; t < size - tailPos; t++)
+			for(int t = headPos; t < tailPos; t++)
 			{
 				tail = tail.next;
 			}
