@@ -134,8 +134,8 @@ public class PartitionLinkedList
 
 		Node n = null;
 
-		// try
-		// {
+		try
+		{
 			for(int i = 0; i < args.length; i++)
 			{
 				int val = Integer.parseInt(args[i]);
@@ -164,10 +164,10 @@ public class PartitionLinkedList
 				c = partitionList(c, val);
 				c.printData();
 			}
-		// }
-		// catch(Exception e)
-		// {
-		// 	System.out.println(e);
-		// }
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
 	}
 }
