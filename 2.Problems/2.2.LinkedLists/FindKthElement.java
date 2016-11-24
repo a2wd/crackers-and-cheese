@@ -66,12 +66,42 @@ public class FindKthElement
 		return l.get(element);
 	}
 
+	public static Node findKthElementModel(int k, Node n)
+	{
+		if(k < 0 || n == null)
+		{
+			return null;
+		}
+
+		Node p1 = n;
+		Node p2 = n;
+
+		for(int i = 0; i <= k; i++)
+		{
+			p1 = p1.next;
+
+			if(p1 == null)
+			{
+				return null;
+			}
+		}
+
+		while(p1 != null)
+		{
+			p1 = p1.next;
+			p2 = p2.next;
+		}
+
+		return p2;
+	}
+
 	public static void main(String[] args)
 	{
 		if(args.length == 0)
 		{
-			System.out.println("Usage: java FindKthElement [-s] 1 2 3 4 5 .. n");
+			System.out.println("Usage: java FindKthElement [-s][-m] 1 2 3 4 5 .. n");
 			System.out.println("Where -s is an optional flag to use an additional data structure and make one pass");
+			System.out.println("Or -m is an optional flag to use the model solution");
 			System.out.println("and 1..n are a series of integers to build into a linked list");
 			return;
 		}
@@ -82,11 +112,17 @@ public class FindKthElement
 		{
 			int i = 0;
 			boolean useOnePass = false;
+			boolean useModelSolution = false;
 
 			if(args[0].equals("-s") || args[0].equals("-S"))
 			{
 				i++;
 				useOnePass = true;
+			}
+			else if(args[0].toLowerCase().equals("-m"))
+			{
+				i++;
+				useModelSolution = true;
 			}
 
 			for(; i < args.length; i++)
@@ -117,6 +153,10 @@ public class FindKthElement
 				if(useOnePass)
 				{
 					KthNode = findKthElementOnePass(k, n);
+				}
+				else if(useModelSolution)
+				{
+					KthNode = findKthElementModel(k, n);
 				}
 				else
 				{

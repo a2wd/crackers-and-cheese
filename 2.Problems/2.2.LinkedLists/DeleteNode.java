@@ -6,6 +6,19 @@ import java.util.Scanner;
 
 public class DeleteNode
 {
+	public static boolean deleteNodeModel(Node n)
+	{
+		if(n == null || n.next == null)
+		{
+			return false;
+		}
+
+		n.data = n.next.data;
+		n.next = n.next.next;
+
+		return true;
+	}
+
 	public static Node deleteNode(Node n, Node list)
 	{
 		// Handle null values

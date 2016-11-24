@@ -43,6 +43,42 @@ public class IsCircular
 		return null;
 	}
 
+	public static Node findLoopModel(Node n)
+	{
+		if(n == null)
+		{
+			return null;
+		}
+
+		Node fast = n;
+		Node slow = n;
+
+		while(fast != null && fast.next != null)
+		{
+			fast = fast.next.next;
+			slow = slow.next;
+
+			if(fast == slow)
+			{
+				break;
+			}
+		}
+
+		if(fast == null || fast.next == null)
+		{
+			return null;
+		}
+
+		slow = n;
+		while(slow != fast)
+		{
+			slow = slow.next;
+			fast = fast.next;
+		}
+
+		return fast;
+	}
+
 	public static void main(String[] args)
 	{
 		if(args.length != 0)
@@ -95,6 +131,10 @@ public class IsCircular
 
 		System.out.println("Finding loop");
 		Node l = findLoop(n);
+		System.out.println("Loop at: " + l.data);
+
+		System.out.println("Finding loop with model method");
+		l = findLoopModel(n);
 		System.out.println("Loop at: " + l.data);
 
 		System.out.println("Unlinking");
