@@ -37,6 +37,20 @@ public class Node {
 		return head;
 	}
 
+	public int size()
+	{
+		Node n = this;
+		int size = 1;
+
+		while(n.next != null)
+		{
+			n = n.next;
+			size++;
+		}
+
+		return size;
+	}
+
 	public void printData()
 	{
 		Node n = this;
