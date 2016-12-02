@@ -8,6 +8,11 @@ class Stack
 {
 	Node top;
 
+	Stack()
+	{
+		this.top = null;
+	}
+
 	boolean isEmpty()
 	{
 		return (top == null);
@@ -63,7 +68,11 @@ class Stack
 		while(n != null)
 		{
 			s.append(Integer.toString(n.data));
-			s.append(",");
+
+			if(n.next != null)
+			{
+				s.append(", ");
+			}
 			n = n.next;
 		}
 

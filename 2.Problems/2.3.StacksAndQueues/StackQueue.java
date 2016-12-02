@@ -1,10 +1,10 @@
-// 2.3.5 My Queue
+// 2.3.5 Stack Queue
 // Implement a queue using 2 stacks
 
 import java.lang.*;
 import java.util.*;
 
-public class MyQueue
+public class StackQueue
 {
 	Stack front, end;
 
