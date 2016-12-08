@@ -54,15 +54,17 @@ public class SetOfStacks
 			return;
 		}
 
-		newNode.next = currentSubstack;
-		currentSubstack = newNode;
-
-		if(currentHeight == maxHeight)
+		if(currentHeight > maxHeight)
 		{
 			stacks.add(currentSubstack);
-			currentSubstack = null;
-			currentHeight = 0;
+			currentSubstack = newNode;
+			currentHeight = 1;
+
+			return;
 		}
+
+		newNode.next = currentSubstack;
+		currentSubstack = newNode;
 	}
 
 	public void moveToNextStack()
@@ -79,7 +81,7 @@ public class SetOfStacks
 
 	public int pop()
 	{
-		if(currentSubstack == null)
+		while(currentSubstack == null)
 		{
 			moveToNextStack();
 		}
@@ -88,11 +90,6 @@ public class SetOfStacks
 		currentSubstack = currentSubstack.next;
 		currentHeight--;
 
-		if(currentHeight == 0 && stacks.size() > 0)
-		{
-			moveToNextStack();
-		}
-
 		return val;
 	}
 
@@ -100,16 +97,16 @@ public class SetOfStacks
 	{
 		int stacksSize = stacks.size();
 
+		if(stackIndex > stacksSize)
+		{
+			throw new EmptyStackException();
+		}
+
 		if(stackIndex == stacksSize)
 		{
 			if(currentSubstack == null)
 			{
-				if(stackIndex == 0)
-				{
-					throw new EmptyStackException();
-				}
-
-				currentSubstack = stacks.remove(stackIndex - 1);
+				throw new EmptyStackException();
 			}
 
 			int val = currentSubstack.data;
@@ -119,13 +116,15 @@ public class SetOfStacks
 		}
 
 
-		Node thisStack = stacks.get(stackIndex - 1);
+		Node thisStack = stacks.get(stackIndex);
 
 		if(thisStack.size() == 1)
 		{
-			stacks.remove(stackIndex - 1);
+			stacks.remove(stackIndex);
+			return thisStack.data;
 		}
 
+		stacks.set(stackIndex, thisStack.next);
 		return thisStack.data;
 	}
 
