@@ -71,7 +71,7 @@ class Stack
 
 			if(n.next != null)
 			{
-				s.append(", ");
+				s.append(",");
 			}
 			n = n.next;
 		}

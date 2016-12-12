@@ -8,7 +8,7 @@ public class StackQueue
 {
 	Stack front, end;
 
-	MyQueue()
+	StackQueue()
 	{
 		this.front = new Stack();
 		this.end = new Stack();
@@ -63,7 +63,7 @@ public class StackQueue
 			return;
 		}
 
-		MyQueue queue = new MyQueue();
+		StackQueue queue = new StackQueue();
 		Scanner scanner = new Scanner(System.in);
 
 		while(true)
