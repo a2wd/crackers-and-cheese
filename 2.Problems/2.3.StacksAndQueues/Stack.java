@@ -7,26 +7,29 @@ import java.lang.StringBuilder;
 class Stack
 {
 	Node top;
+	int size;
 
 	Stack()
 	{
 		this.top = null;
+		this.size = 0;
 	}
 
 	boolean isEmpty()
 	{
-		return (top == null);
+		return (size == 0);
 	}
 
 	int pop()
 	{
-		if(top == null)
+		if(size == 0)
 		{
 			throw new EmptyStackException();
 		}
 
 		int item = top.data;
 		top = top.next;
+		size--;
 		return item;
 	}
 
@@ -35,6 +38,7 @@ class Stack
 		Node t = new Node(item);
 		t.next = top;
 		top = t;
+		size++;
 	}
 
 	int peek()
@@ -49,14 +53,6 @@ class Stack
 
 	int size()
 	{
-		int size = 0;
-		Node p = top;
-		while(p != null)
-		{
-			p = p.next;
-			size++;
-		}
-
 		return size;
 	}
 

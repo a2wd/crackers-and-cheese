@@ -54,13 +54,54 @@ public class StackQueue
 		return front.peek();
 	}
 
+	//Model answers
+	public int sizeModel()
+	{
+		return front.size() + end.size();
+	}
+
+	public void addModel(int val)
+	{
+		front.push(val);
+	}
+
+	public void shiftStacksModel()
+	{
+		if(end.isEmpty())
+		{
+			while(!front.isEmpty())
+			{
+				end.push(front.pop());
+			}
+		}
+	}
+
+	public int peekModel()
+	{
+		shiftStacksModel();
+		return end.peek();
+	}
+
+	public int removeModel()
+	{
+		shiftStacksModel();
+		return end.pop();
+	}
+
 
 	public static void main(String[] args)
 	{
+		boolean useModel = false;
+
 		if(args.length > 0)
 		{
-			printUsage();
-			return;
+			if(!args[0].toLowerCase().equals("-m"))
+			{
+				printUsage();
+				return;
+			}
+
+			useModel = true;
 		}
 
 		StackQueue queue = new StackQueue();
@@ -100,7 +141,14 @@ public class StackQueue
 					continue;
 				}
 
-				queue.add(value);
+				if(useModel)
+				{
+					queue.addModel(value);
+				}
+				else
+				{
+					queue.add(value);
+				}
 			}
 
 			if(operation.equals("remove"))
@@ -113,7 +161,14 @@ public class StackQueue
 
 				try
 				{
-					value = queue.remove();
+					if(useModel)
+					{
+						value = queue.removeModel();
+					}
+					else
+					{
+						value = queue.remove();
+					}
 				}
 				catch(Exception e)
 				{
@@ -134,7 +189,14 @@ public class StackQueue
 
 				try
 				{
-					value = queue.peek();
+					if(useModel)
+					{
+						value = queue.peekModel();
+					}
+					else
+					{
+						value = queue.peek();
+					}
 				}
 				catch(Exception e)
 				{
@@ -149,7 +211,8 @@ public class StackQueue
 
 	static void printUsage()
 	{
-		System.out.println("Usage: java StackQueue");
+		System.out.println("Usage: java StackQueue [-m]");
+		System.out.println("The optional flag, -m invokes the program with the model solution");
 		System.out.println("StdIn: A series of commands to add, remove, or peek");
 		System.out.println("Eg: add 120 would add the value 120 onto the queue");
 		System.out.println("Exit with x");
