@@ -60,7 +60,7 @@ public class SortStack
 			boolean pushedCurr = false;
 			for(int i = currDepth; i < depth; i++)
 			{
-				if(temp.isEmpty() || (curr > temp.peek() && pushedCurr == false))
+				if(temp.isEmpty() || (curr < temp.peek() && pushedCurr == false))
 				{
 					s.push(curr);
 					pushedCurr = true;
@@ -75,6 +75,26 @@ public class SortStack
 		}
 	}
 
+	//Model solution
+	public static Stack sortModel(Stack s)
+	{
+		Stack t = new Stack();
+
+		while(!s.isEmpty())
+		{
+			int temp = s.pop();
+
+			while(!t.isEmpty() && t.peek() > temp)
+			{
+				s.push(t.pop());
+			}
+
+			t.push(temp);
+		}
+
+		return t;
+	}
+
 	public static void main(String[] args)
 	{
 		if(args.length < 1)
@@ -83,17 +103,35 @@ public class SortStack
 			return;
 		}
 
+		int i = 0;
+		boolean useModel = false;
+
+		if(args[0].toLowerCase().equals("-m"))
+		{
+			i++;
+			useModel = true;
+		}
+
 		try
 		{
 			Stack s = new Stack();
 
-			for(int i = 0; i < args.length; i++)
+			for(; i < args.length; i++)
 			{
 				s.push(Integer.parseInt(args[i]));
 			}
 
 			System.out.println("Before sorting: " + s.toString());
-			sortStack(s);
+
+			if(useModel)
+			{
+				s = sortModel(s);
+			}
+			else
+			{
+				sortStack(s);
+			}
+
 			System.out.println("After sorting: " + s.toString());
 		}
 		catch(Exception e)
@@ -104,7 +142,8 @@ public class SortStack
 
 	static void printUsage()
 	{
-		System.out.println("Usage: java SortStack i j k ... n");
+		System.out.println("Usage: java SortStack [-m] i j k ... n");
+		System.out.println("The optional flag -m invokes the program with the model solution");
 		System.out.println("Where i .. n are a series of integer values to push onto the stack");
 	}
 }
