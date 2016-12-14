@@ -87,7 +87,7 @@ public class StackQueue
 				}
 				catch(Exception e)
 				{
-					System.out.println("Expected a number but got something else: " + e);
+					System.out.println("Expected a number but got something else: [" + tokens[1] + "]");
 					continue;
 				}
 			}
@@ -149,7 +149,7 @@ public class StackQueue
 
 	static void printUsage()
 	{
-		System.out.println("Usage: java MyQueue");
+		System.out.println("Usage: java StackQueue");
 		System.out.println("StdIn: A series of commands to add, remove, or peek");
 		System.out.println("Eg: add 120 would add the value 120 onto the queue");
 		System.out.println("Exit with x");
