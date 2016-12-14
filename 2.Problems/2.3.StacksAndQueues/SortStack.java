@@ -26,6 +26,7 @@ public class SortStack
 		//Base case, depth of 1 is sorted
 		if(depth == 1)
 		{
+			s.push(temp.pop());
 			return;
 		}
 
@@ -40,7 +41,7 @@ public class SortStack
 		s.push(curr);
 		currDepth--;
 
-		while(currDepth > 0)
+		while(currDepth >= 0)
 		{
 			//Get next value
 			while(!s.isEmpty())
@@ -56,11 +57,13 @@ public class SortStack
 			}
 
 			//Put value at correct location
+			boolean pushedCurr = false;
 			for(int i = currDepth; i < depth; i++)
 			{
-				if(temp.isEmpty() || curr > temp.peek())
+				if(temp.isEmpty() || (curr > temp.peek() && pushedCurr == false))
 				{
 					s.push(curr);
+					pushedCurr = true;
 				}
 				else
 				{
@@ -80,8 +83,8 @@ public class SortStack
 			return;
 		}
 
-		// try
-		// {
+		try
+		{
 			Stack s = new Stack();
 
 			for(int i = 0; i < args.length; i++)
@@ -89,14 +92,14 @@ public class SortStack
 				s.push(Integer.parseInt(args[i]));
 			}
 
-			System.out.println(s.toString());
+			System.out.println("Before sorting: " + s.toString());
 			sortStack(s);
-			System.out.println(s.toString());
-		// }
-		// catch(Exception e)
-		// {
-		// 	System.out.println("There was an error: " + e);
-		// }
+			System.out.println("After sorting: " + s.toString());
+		}
+		catch(Exception e)
+		{
+			System.out.println("There was an error: " + e);
+		}
 	}
 
 	static void printUsage()
