@@ -1,27 +1,29 @@
+import java.util.*;
+
 class Graph
 {
-  List<Graph> adjacent;
+  ArrayList<Graph> adjacent;
   boolean visited;
   Object data;
 
   Graph(Object data)
   {
     this.data = data;
-    this.adjacent = new List<Graph>();
+    this.adjacent = new ArrayList<Graph>();
     this.visited = false;
   }
 }
 
 public class GraphDfsBfs
 {
-  void bfs(Graph root)
+  public static void bfs(Graph root)
   {
     if(root == null)
     {
       return;
     }
 
-    //visit(root);
+    visit(root);
     root.visited = true;
 
     for(Graph n : root.adjacent)
@@ -33,20 +35,20 @@ public class GraphDfsBfs
     }
   }
 
-  void dfs(Graph root)
+  public static void dfs(Graph root)
   {
-    Queue q = new Queue();
+    Queue queue = new Queue();
     visit(root);
     queue.enqueue(root);
 
     while(!queue.isEmpty())
     {
-      Graph n = queue.dequeue();
+      Graph n = (Graph) queue.dequeue();
       for(Graph a : n.adjacent)
       {
         if(a.visited == false)
         {
-          //visit(a);
+          visit(a);
           a.visited = true;
           queue.enqueue(a);
         }
@@ -54,7 +56,15 @@ public class GraphDfsBfs
     }
   }
 
-  public static void main()
+  public static void visit(Graph g)
+  {
+    if(g != null)
+    {
+      System.out.println("Visiting " + g.data.toString());
+    }
+  }
+
+  public static void main(String[] args)
   {
     System.out.println("Graph searching");
   }
