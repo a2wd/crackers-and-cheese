@@ -4,22 +4,22 @@ public class BuildBst
 {
 	public static BinaryTree BuildBst(int[] values)
 	{
-		return BuildBst(values, 0, values.length);
+		return BuildBst(values, 0, values.length - 1);
 	}
 
 	public static BinaryTree BuildBst(int[] values, int lo, int hi)
 	{
-		if(hi - lo < 1)
+		if(hi - lo < 0)
 		{
 			return null;
 		}
 
-		int currentNode = ( ( (hi - lo) / 2 ) + lo ) - 1;
+		int currentNode = (((hi - lo) / 2 ) + lo);
 
 		BinaryTree node = new BinaryTree(values[currentNode]);
 
 		node.left = BuildBst(values, lo, currentNode - 1);
-		node.right = BuildBst(values, currentNode + 1, hi - 1);
+		node.right = BuildBst(values, currentNode + 1, hi);
 
 		return node;
 	}
@@ -39,7 +39,7 @@ public class BuildBst
 		}
 
 		BinaryTree b = BuildBst(vals);
-		System.out.println(b.postOrder());
+		System.out.println(b.toString());
 	}
 
 	static void printUsage()
