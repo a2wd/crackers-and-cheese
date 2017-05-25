@@ -17,7 +17,7 @@ public class IsBinaryTreeBalanced
 	{
 		if(root == null)
 		{
-			return false;
+			return true;
 		}
 
 		int leftDepth = NodeHeight(root.left);
@@ -28,7 +28,7 @@ public class IsBinaryTreeBalanced
 			return false;
 		}
 
-		return true;
+		return IsBalanced(root.left) && IsBalanced(root.right);
 	}
 
 	public static void main(String args[])
