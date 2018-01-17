@@ -3,12 +3,14 @@ import java.util.ArrayList;
 
 public class Graph
 {
-	public ArrayList<Graph> children;
+	public ArrayList<Graph> nodes;
+	public boolean isVisited;
 	public int data;
 
 	Graph(int data)
 	{
 		this.data = data;
-		children = new ArrayList<Graph>();
+		this.isVisited = false;
+		this.nodes = new ArrayList<Graph>();
 	}
 }
