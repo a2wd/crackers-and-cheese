@@ -1,4 +1,4 @@
-# 2.4 Graphs & Trees
+# 2.4 Graphs & Trees
 
 Problems based on graphs, digraphs, btrees, BSTs & other similar data-structures.
 
